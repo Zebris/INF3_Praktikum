@@ -61,7 +61,7 @@ bool TCPclient::conn(string address , int port){
 		//resolve the hostname, its not an ip address
 		if ( (he = gethostbyname( address.c_str() ) ) == NULL){
 			//gethostbyname failed
-			herror("gethostbyname");
+			perror("gethostbyname");
 			cout<<"Failed to resolve hostname\n";
 
 			return false;
