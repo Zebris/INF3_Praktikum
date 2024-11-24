@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1732471423 source:/home/ubuntu/INF3_Praktikum/SIMPLESOCKET.cc
+	<iostream>
+	<cstdio>
+	<cstring>
+	<string>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<unistd.h>
+	<sys/types.h>
+	<netinet/in.h>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<cerrno>
+	<ctime>
+	"SIMPLESOCKET.h"
+
+1732467418 /home/ubuntu/INF3_Praktikum/SIMPLESOCKET.h
+	<string>
+	<arpa/inet.h>
+

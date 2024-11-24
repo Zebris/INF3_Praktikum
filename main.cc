@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : INF3_Prak.cpp
-// Author      : 
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C, Ansi-style
@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 
-#include "TASK3.H"
+#include "TASK3.h"
 
 
 using namespace std;
