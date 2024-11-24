@@ -6,7 +6,7 @@
  */
 
 
-#include "TASK3.H"
+#include "TASK3.h"
 
 #include <iostream>
 

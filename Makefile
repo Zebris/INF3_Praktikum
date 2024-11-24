@@ -6,37 +6,37 @@ LIBS=$(shell pkg-config --libs opencv)
 OBJS= main.o  TASK1.o TASK2.o TASK3.o TASK4.o TASK5.o SHA256.o SIMPLESOCKET.o
 DEMOTARGET=main server client mainTest
 
-client.o:	client.C
+client.o:	client.cc
 	$(CC) -c $<  -std=c++11
 
-server.o:	server.C
+server.o:	server.cc
 	$(CC) -c $<  -std=c++11
 
-SIMPLESOCKET.o:	SIMPLESOCKET.C
+SIMPLESOCKET.o:	SIMPLESOCKET.cc
 	$(CC) -c $<  -std=c++11
 
-SHA256.o:	SHA256.C
+SHA256.o:	SHA256.cc
 	$(CC) -c $<  -std=c++11
 
-TASK1.o:	TASK1.C
+TASK1.o:	TASK1.cc
 	$(CC) -c $<  -std=c++11
 
-TASK2.o:	TASK2.C
+TASK2.o:	TASK2.cc
 	$(CC) -c $<  -std=c++11
 
-TASK3.o:	TASK3.C
+TASK3.o:	TASK3.cc
 	$(CC) -c $<  -std=c++11
 
-TASK4.o:	TASK4.C
+TASK4.o:	TASK4.cc
 	$(CC) -c $<  -std=c++11 
 
-TASK5.o:	TASK5.C
+TASK5.o:	TASK5.cc
 	$(CC) -c $<  -std=c++11 
 
-main.o:	main.C
+main.o:	main.cc
 	$(CC) -c $<  -std=c++11	
 
-mainTest.o:	mainTest.C
+mainTest.o:	mainTest.cc
 	$(CC) -c $<  -std=c++11		
 
 
