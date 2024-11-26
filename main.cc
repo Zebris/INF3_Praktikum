@@ -1,9 +1,7 @@
 //============================================================================
-// Name        : INF3_Prak.cpp
-// Author      :
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C, Ansi-style
+// Name        : INF3_Praktikum.cpp
+// Author      : Gruppe 2; Fichtner, Holzer, Hornig
+// Version     : 0.01
 //============================================================================
 
 #include <string>
