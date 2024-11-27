@@ -18,9 +18,57 @@
 
 #include "SIMPLESOCKET.h"
 
+class ServerShip: public TCPserver
+{
+public:
+	ServerShip(int portNmb, int bSize);
+	~ServerShip();
+
+private:
+	ServerShip();
+
+protected:
+
+string myResponse(string input);
+};
+
+
+
 
 int main(){
 	srand(time(nullptr));
-	TCPserver srv(2022,25);
+	ServerShip srv(2023,25);
 	srv.run();
 }
+
+string ServerShip::myResponse(string input)
+{
+	if (0 == input.compare(0,3,"ABC"))
+	{
+		return string("xyz");
+	}
+
+
+	return string("#"+input+"#");
+}
+
+
+ServerShip::~ServerShip()
+{
+
+}
+
+
+ServerShip::ServerShip(int portNmb, int bSize): TCPserver(portNmb, bSize)
+{
+	//Spielfeldinit.
+}
+
+//Weiter Schritte:
+
+// CLient mit Strategie ausstatten, ob getroffen oder nicht
+// Server beinhaltet das Spielfeld
+// Protokoll(Kommunikation):
+// Serverkommand | Antwort | Kommentar (Fehlerfälle) |
+// undefined string | ERROR | ...
+// Koordinatenbereich eingehalten | SPezifisch / ERROR   
