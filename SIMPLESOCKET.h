@@ -134,7 +134,7 @@ protected:
 	 * \return string containing the response of the server.
 	 *
 	 */
-	virtual string        myResponse(string input);
+	virtual string        myResponse(const std::string &input) = 0; //Geändert zu const std::string mit &input statt "input", außerdem pure virtual function
 
 private:
 

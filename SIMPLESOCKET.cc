@@ -193,6 +193,7 @@ string TCPserver::response(string incomingMsg){
 }
 
 
-string TCPserver::myResponse(string input){
+std::string TCPserver::myResponse(const std::string &input){
 	return string("NO DATA YET YET YET");
 }
+//Geändert, damit per override überschrieben werden kann
