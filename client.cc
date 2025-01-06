@@ -72,8 +72,8 @@ std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int ma
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
-    for (int x = 0; x < maxX; ++x) {
-        for (int y = 0; y < maxY; ++y) {
+    for (int x = 1; x < maxX; ++x) {
+        for (int y = 1; y < maxY; ++y) {
             shots.push_back({x, y}); // adds every coordinate to the vector
         }
     }
@@ -99,6 +99,7 @@ std::vector<std::pair<int, int>> BattleShipClient::generateGridStrategy(int maxX
 
 int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) { // Shooting is based on the vectors of shots
     int shotsFired = 0;
+    char gameover = 99; // Abbruchbedingung
     
     for (const auto &shot : shots) {  // ranged base for loop for all shots
         // check if the coordinate was already used
@@ -109,11 +110,12 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) { 
         ++shotsFired; // increase the number of shots
         std::string shotMessage = "SHOT " + std::to_string(shot.first) + " " + std::to_string(shot.second);
         client.sendData(shotMessage); // sends shot message to the server
+        std::cout << shotMessage << std::endl;
         std::string response = client.receive(1024);  // receive server response
         std::cout << "Antwort vom Server: " << response << std::endl;
 
         if (response == "ALL_SHIPS_DESTROYED") { // end the game if every ship was destroyed or its game over
-            return std::string("GAME_OVER");
+            return gameover;
         }
 
         firedShots.insert(shot);  // add the fired coordinates to the set to avoid duplicates

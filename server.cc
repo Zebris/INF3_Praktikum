@@ -56,9 +56,9 @@ std::string ServerShip::myResponse(const std::string &input) {
             int x, y;
             sscanf(input.c_str(), "SHOT %d %d", &x, &y); // checks 
             return processShot(x, y);
-        }else if (input == "BYEBYE") {
+        }else{
             return "GOODBYE";
-        }
+            }
        return "INVALID_COMMAND";
     }
 
