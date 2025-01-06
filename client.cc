@@ -112,8 +112,8 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) { 
         std::string response = client.receive(1024);  // receive server response
         std::cout << "Antwort vom Server: " << response << std::endl;
 
-        if (response == "ALL_SHIPS_DESTROYED" || response == "GAME_OVER") { // end the game if every ship was destroyed or its game over
-            break;
+        if (response == "ALL_SHIPS_DESTROYED") { // end the game if every ship was destroyed or its game over
+            return std::string("GAME_OVER");
         }
 
         firedShots.insert(shot);  // add the fired coordinates to the set to avoid duplicates
