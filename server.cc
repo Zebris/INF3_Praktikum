@@ -66,13 +66,10 @@ ServerShip::ServerShip(int portNmb, int bSize): TCPserver(portNmb, bSize) // con
 {
     srand(static_cast<unsigned>(time(nullptr))); // initializes random generator
     initializeBoard(); // initializes board
-	std::cout << "Server initialized on port " << portNmb << " with buffer size " << bSize << std::endl; // output to check if the server initiation was successfull
+	std::cout << "Server initialized on port " << portNmb << std::endl; // output to check if the server initiation was successfull
 }
 
-ServerShip::~ServerShip() // destructor of the ServerShip class, which outputs a shutdown text
-{
-	std::cout <<"Server shutting down"<< std::endl;
-}
+ServerShip::~ServerShip(){} // destructor of the ServerShip class, which outputs a shutdown text
 
 void ServerShip::initializeBoard(int SizeX, int SizeY) // initialization of the board with sizes of x and y
 {

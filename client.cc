@@ -39,7 +39,6 @@ int main() {
 	TCPclient tcpclient; // creation of a TCPclient object
 	std::string host = "localhost"; // defines the server host
 	int port = 2022; // defines the server port
-	string msg; 
 
 	// connection to host
 	if(!tcpclient.conn(host, port)) // if the connection fails end the program
@@ -56,21 +55,20 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-client.playRandomStrategy(10, 10, 500); // playing with the random strategy
+client.playRandomStrategy(10, 10, 10); // playing with the random strategy
 
 
-//client.playGridStrategy(10, 10, 100); // playing with the grid strategy
+//client.playGridStrategy(10, 10, 500); // playing with the grid strategy
 
 return 0;
 
 }
 
 
-
-
 BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // constructor which gives the TCP client
 
 std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int maxX, int maxY) { // generates a random shooting strategy
+    
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
@@ -85,6 +83,7 @@ std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int ma
 }
 
 std::vector<std::pair<int, int>> BattleShipClient::generateGridStrategy(int maxX, int maxY) { // generates a grid based shooting strategy
+
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
@@ -131,8 +130,6 @@ int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { 
         totalRandomShots += playGame(randomShots); // play with the generated random strategy
     }
 
-    double avgRandomShots = static_cast<double>(totalRandomShots) / repetitions; // calculate the average of shots over all repetitions
-    std::cout << "Durchschnittliche Versuche für die Zufallsstrategie: " << avgRandomShots << std::endl;
     return totalRandomShots; // returns the number of total shots needed
 }
 
@@ -144,30 +141,5 @@ int BattleShipClient::playGridStrategy(int MaxX, int MaxY, int repetitions) { //
         totalRasterShots += playGame(rasterShots); // play with the grid strategy
     }
 
-    double avgRasterShots = static_cast<double>(totalRasterShots) / repetitions; // calculate the average of shots over all repetitions
-    std::cout << "Durchschnittliche Versuche für die Rasterstrategie: " << avgRasterShots << std::endl;
     return totalRasterShots; // returns the number of total shots needed
-}
-
-
-
-
-
-void BattleShipClient::playBothStrategies(int maxX, int maxY, int repetitions) { // play both strategies and evaluates 
-    int totalRandomShots = 0;
-    int totalRasterShots = 0;
-
-    for (int i = 0; i < repetitions; ++i) {  // repeat the game for the amount of repetitions
-        std::vector<std::pair<int, int>> randomShots = generateRandomStrategy(maxX, maxY); // random strategy
-        totalRandomShots += playGame(randomShots);
-
-        std::vector<std::pair<int, int>> rasterShots = generateGridStrategy(maxX, maxY); // grid based strategy
-        totalRasterShots += playGame(rasterShots);
-    }
-
-    double avgRandomShots = static_cast<double>(totalRandomShots) / repetitions; // calculates the average for the random strategy
-    double avgRasterShots = static_cast<double>(totalRasterShots) / repetitions; // calculates the average for the grid strategy
-
-    std::cout << "Durchschnittliche Versuche für die Zufallsstrategie: " << avgRandomShots << std::endl;
-    std::cout << "Durchschnittliche Versuche für die Rasterstrategie: " << avgRasterShots << std::endl;
 }
