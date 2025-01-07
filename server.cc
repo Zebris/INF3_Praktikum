@@ -32,8 +32,8 @@ public:
 	~ServerShip();  // destructor for closing the server
 
 private:
-    int m_boardWidth = 10;
-    int m_boardHeight = 10;
+    int m_boardWidth = 10; // width of the game board
+    int m_boardHeight = 10; // height of the game board
     int m_remainingShips = 0; // contains the number of remaining ships
 
     std::vector<std::vector<char>> Board; // 2D vector for the board
@@ -182,7 +182,7 @@ std::string ServerShip::myResponse(const std::string &input) {
             sscanf(input.c_str(), "SHOT %d %d", &x, &y); // checks 
             return processShot(x, y);
         }else{
-            return "GOODBYE";
+            return "GOODBYE"; // returns a default response if the command is not recognized
             }
     }
 
@@ -192,9 +192,9 @@ void ServerShip::printBoard() {
 
     for (int y = 0; y < m_boardHeight; ++y) {
         for (int x = 0; x < m_boardWidth; ++x) {
-            std::cout << Board[y][x] << " ";  // Ausgabe jedes Feldes des Boards
+            std::cout << Board[y][x] << " ";  // Output of each field of the board
         }
-        std::cout << std::endl;  // Neue Zeile nach jeder Reihe
+        std::cout << std::endl;  // New line after each row
     }
     std::cout << std::endl;
 }
