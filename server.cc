@@ -143,7 +143,7 @@ std::string ServerShip::processShot(int x, int y) { // logic for shooting and ch
         Board[y][x] = 'X'; // mark the position as "HIT"
             if (isShipDestroyed(x, y)) { // check if the ship was destroyed
             m_remainingShips--; // if the ship was destroyed lower the amount of ships
-            std::string result = (m_remainingShips == 0) ? "ALL_SHIPS_DESTROYED" : "HIT_AND_DESTROYED"; // Ternary Operator 
+            std::string result = (m_remainingShips  == 0) ? "ALL_SHIPS_DESTROYED" : "HIT_AND_DESTROYED"; // Ternary Operator potentially < 0 than == 0
             printBoard();
             return  result;
         }
@@ -188,7 +188,7 @@ std::string ServerShip::myResponse(const std::string &input) {
 
 
 void ServerShip::printBoard() {
-    std::cout << "Aktuelles Spielfeld:" << std::endl;
+    std::cout << "Game Board:" << std::endl;
 
     for (int y = 0; y < m_boardHeight; ++y) {
         for (int x = 0; x < m_boardWidth; ++x) {

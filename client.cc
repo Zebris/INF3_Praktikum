@@ -55,9 +55,9 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-client.playRandomStrategy(10, 10, 100); // playing with the random strategy
+//client.playRandomStrategy(10, 10, 5); // playing with the random strategy
 
-//client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
+client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
 
 return 0;
 
