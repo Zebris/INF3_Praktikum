@@ -73,15 +73,7 @@ ServerShip::ServerShip(int portNmb, int bSize): TCPserver(portNmb, bSize) // con
 }
 
 
-
-
-
-
 ServerShip::~ServerShip(){} // destructor of the ServerShip class, which outputs a shutdown text
-
-
-
-
 
 
 void ServerShip::initializeBoard() // initialization of the board with sizes of x and y
@@ -91,12 +83,16 @@ void ServerShip::initializeBoard() // initialization of the board with sizes of 
 
 }
 
+
 void ServerShip::placeShips() // places ships on the board
 {
     m_remainingShips = ShipSizes.size(); // sets the amount of remaining ships to the size of the ShipSizes vector
 
-    for (int size : ShipSizes) { // for every ship 
-        bool placed = false; // check if the ship was placed successfully 
+
+    for(int i = 0; i < ShipSizes.size(); ++i)
+    {
+        int size = ShipSizes[i];
+        bool placed = false;
         while (!placed) { // if the ship was not placed, repeat the process until every ship is placed
             int x = rand() % m_boardWidth; // random x coordinate for the beginning of the ship
             int y = rand() % m_boardHeight; // random y coordinate for the beginning of the ship
@@ -106,8 +102,11 @@ void ServerShip::placeShips() // places ships on the board
                 placed = true; // set placed to true to mark, that the ship was placed successfully
             }
         }
+
     }
+
 }
+
 
 bool ServerShip::canPlaceShip(int x, int y, int size, bool horizontal) { // checks if a ship can be placed at that position
     if (horizontal) {
@@ -124,6 +123,7 @@ bool ServerShip::canPlaceShip(int x, int y, int size, bool horizontal) { // chec
     return true; // if the slot is unoccupied return true
 }
 
+
 void ServerShip::placeShip(int x, int y, int size, bool horizontal) { // places a singular ship on the board
     for (int i = 0; i < size; ++i) { // every segment of the ship
         if (horizontal) {
@@ -133,6 +133,7 @@ void ServerShip::placeShip(int x, int y, int size, bool horizontal) { // places 
         }
     }
 }
+
 
 std::string ServerShip::processShot(int x, int y) { // logic for shooting and checks if the shot connects or not
 
@@ -161,13 +162,14 @@ std::string ServerShip::processShot(int x, int y) { // logic for shooting and ch
     return "ALREADY_SHOT"; // logic to tell how often the same position was shot
 }
 
-bool ServerShip::isShipDestroyed(int x, int y) { // checks all adjacent fields to check if a ship is destroyed
-    for (int dx = -1; dx <= 1; ++dx) { // for loop for adjacent fields in x
-        for (int dy = -1; dy <= 1; ++dy) { // for loop for adjacent fields in y
-            int nx = x + dx; // calculates the new x-coordinate
-            int ny = y + dy; // calculates the new y-coordinate
 
-            if (nx >= 0 && nx < m_boardWidth && ny >= 0 && ny < m_boardHeight && Board[ny][nx] == 'S'){ // check if the new coordinates are within the board size and if a ship is adjacent
+bool ServerShip::isShipDestroyed(int x, int y) { // checks all adjacent fields to check if a ship is destroyed
+    for (int dx = -1; dx <= 1; ++dx) { // for loop for adjacent fields in x |(3x3)|
+        for (int dy = -1; dy <= 1; ++dy) { // for loop for adjacent fields in y
+            int newX = x + dx; // calculates the new x-coordinate
+            int newY = y + dy; // calculates the new y-coordinate
+
+            if (newX >= 0 && newX < m_boardWidth && newY >= 0 && newY < m_boardHeight && Board[newY][newX] == 'S'){ // check if the new coordinates are within the board size and if a ship is adjacent
                     return false; // segment of the ship is still intact
             }
         }

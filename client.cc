@@ -28,13 +28,14 @@ private:
 public:
 
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
-    int playGame(const vector<std::pair<int, int>> &shots); // game logic
+    void playGame(const vector<std::pair<int, int>> &shots); // game logic
     void playRandomStrategy(int MaxX, int MaxY); // plays with the random strategy
     void playEveryFieldStrategy(int MaxX, int MaxY); // plays with the everyField strategy
 
 };
 
-int main() {
+int main()
+{
     srand(time(NULL)); // initializes random generator with the time
     TCPclient tcpclient; // creation of a TCPclient object
     std::string host = "localhost"; // defines the server host
@@ -55,6 +56,8 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
+/* Playing the different strategies */
+
 //client.playRandomStrategy(10, 10); // playing with the random strategy
 
 client.playEveryFieldStrategy(10, 10); // playing with the everyField strategy
@@ -67,13 +70,13 @@ return 0;
 BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // constructor which gives the TCP client
 
 
-std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int maxY) { // generates a random shooting strategy
-    
+std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int maxY) // generates a random shooting strategy
+{
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
-    for (int x = 0; x < maxX; ++x) {
-        for (int y = 0; y < maxY; ++y) {
+    for (size_t x = 0; x < maxX; ++x) {
+        for (size_t y = 0; y < maxY; ++y) {
             shots.push_back({x, y}); // adds every coordinate to the vector
         }
     }
@@ -83,7 +86,8 @@ std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int 
 }
 
 
-std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, int maxY) {
+std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, int maxY)
+{
     std::vector<std::pair<int, int>> shots;
 
     // Generate shots for every field on the board
@@ -97,12 +101,14 @@ std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, 
 }
 
 
-int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
+void BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots)
+{
 
-    int shotsFired = 0;   // Counter for the number of shots fired
 
-    for(const auto &shot : shots) //iterate over all shots
+    for(int i = 0; i < shots.size(); ++i)
     {
+        const auto &shot = shots[i];
+
         if(firedShots.find(shot) != firedShots.end()) //check if the shot has already been fired
         {
             continue; //skip already fired shots
@@ -121,9 +127,8 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
         }
 
         firedShots.insert(shot); // add the shot to the set of fired shots
-        shotsFired++; // increment the counter
     }
-    return shotsFired; // return the total number of shots fired
+
 }
 
 
