@@ -23,14 +23,14 @@ private:
     std::set<std::pair<int, int>> firedShots; // set for already shot coordinates to avoid duplicates
 
     std::vector<std::pair<int, int>> randomStrategy(int MaxX, int MaxY); // generates a random shooting strategy
-    std::vector<std::pair<int, int>> everyFieldStrategy(int MaxX, int MaxY);
+    std::vector<std::pair<int, int>> everyFieldStrategy(int MaxX, int MaxY); // generates a everyField shooting strategy
 
 public:
 
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
     int playGame(const vector<std::pair<int, int>> &shots); // game logic
     int playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
-    int playEveryFieldStrategy(int MaxX, int MaxY, int repetitions);
+    int playEveryFieldStrategy(int MaxX, int MaxY, int repetitions); // plays with the everyField strategy
 
 };
 
@@ -41,7 +41,7 @@ BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 //client.playRandomStrategy(10, 10, 300); // playing with the random strategy
 
-client.playEveryFieldStrategy(10, 10, 100);
+client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
 
 return 0;
 
