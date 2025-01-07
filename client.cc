@@ -29,8 +29,8 @@ public:
 
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
     int playGame(const vector<std::pair<int, int>> &shots); // game logic
-    void playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
-    void playEveryFieldStrategy(int MaxX, int MaxY, int repetitions); // plays with the everyField strategy
+    void playRandomStrategy(int MaxX, int MaxY); // plays with the random strategy
+    void playEveryFieldStrategy(int MaxX, int MaxY); // plays with the everyField strategy
 
 };
 
@@ -55,9 +55,9 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-//client.playRandomStrategy(10, 10, 5); // playing with the random strategy
+//client.playRandomStrategy(10, 10); // playing with the random strategy
 
-client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
+client.playEveryFieldStrategy(10, 10); // playing with the everyField strategy
 
 return 0;
 
@@ -127,18 +127,13 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 }
 
 
-void BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
-    
-    for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        playGame(randomStrategy(MaxX, MaxY)); // play with the generated random strategy
-    }
+void BattleShipClient::playRandomStrategy(int MaxX, int MaxY) // plays with the random strategy
+{
+    playGame(randomStrategy(MaxX, MaxY)); // play with the generated random strategy
 }
 
 
-void BattleShipClient::playEveryFieldStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
-    
-
-    for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        playGame(everyFieldStrategy(MaxX, MaxY)); // play with the generated random strategy
-    }
+void BattleShipClient::playEveryFieldStrategy(int MaxX, int MaxY) // plays with the every field strategy
+{ 
+    playGame(everyFieldStrategy(MaxX, MaxY)); // plays with the every field strategy    
 }
