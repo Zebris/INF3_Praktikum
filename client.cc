@@ -18,17 +18,17 @@
 class BattleShipClient // Class for client
 {
 private:
-    TCPclient &client; // reference of the TCP client object
 
+    TCPclient &client; // reference of the TCP client object
     std::set<std::pair<int, int>> firedShots; // set for already shot coordinates to avoid duplicates
+
     std::vector<std::pair<int, int>> generateRandomStrategy(int MaxX, int MaxY); // generates a random shooting strategy
     std::vector<std::pair<int, int>> generateGridStrategy(int MaxX, int MaxY); // generates a grid based shooting strategy
 
 public:
-    BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
 
-    int playGame(const vector<std::pair<int, int>>&shots); // game logic
-    void playBothStrategies(int MaxX, int MaxY, int repetitions); // runs both strategies and evaluates
+    BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
+    int playGame(const vector<std::pair<int, int>> &shots); // game logic
     int playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
     int playGridStrategy(int MaxX, int MaxY, int repetitions); // plays with the grid based strategy
 };
@@ -55,7 +55,7 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-client.playRandomStrategy(10, 10, 10); // playing with the random strategy
+client.playRandomStrategy(10, 10, 300); // playing with the random strategy
 
 
 //client.playGridStrategy(10, 10, 500); // playing with the grid strategy
@@ -67,20 +67,28 @@ return 0;
 
 BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // constructor which gives the TCP client
 
+
+
+
+
 std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int maxX, int maxY) { // generates a random shooting strategy
     
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
-    for (int x = 1; x < maxX; ++x) {
-        for (int y = 1; y < maxY; ++y) {
+    for (int x = 0; x < maxX; ++x) {
+        for (int y = 0; y < maxY; ++y) {
             shots.push_back({x, y}); // adds every coordinate to the vector
         }
     }
 
-    std::random_shuffle(shots.begin(), shots.end());  // shuffles the vector to create a random sequence
+    std::random_shuffle(shots.begin(), (shots.end()));  // shuffles the vector to create a random sequence
     return shots; // returns the mixed vector of shots
 }
+
+
+
+
 
 std::vector<std::pair<int, int>> BattleShipClient::generateGridStrategy(int maxX, int maxY) { // generates a grid based shooting strategy
 
@@ -97,34 +105,44 @@ std::vector<std::pair<int, int>> BattleShipClient::generateGridStrategy(int maxX
     return shots; // returns vector with grid based coordinates
 }
 
-int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) { // Shooting is based on the vectors of shots
-    int shotsFired = 0;
-    char gameover = 99; // Abbruchbedingung
-    
-    for (const auto &shot : shots) {  // ranged base for loop for all shots
-        // check if the coordinate was already used
-        if (firedShots.find(shot) != firedShots.end()) {
-            continue; // if the coordinate was already used skip the shot
+
+
+
+
+int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
+
+    int shotsFired = 0;   // Zähler für die abgefeuerten Schüsse
+
+    for(const auto &shot : shots)
+    {
+        if(firedShots.find(shot) != firedShots.end())
+        {
+            continue;
         }
 
-        ++shotsFired; // increase the number of shots
         std::string shotMessage = "SHOT " + std::to_string(shot.first) + " " + std::to_string(shot.second);
-        client.sendData(shotMessage); // sends shot message to the server
-        std::cout << shotMessage << std::endl;
-        std::string response = client.receive(1024);  // receive server response
-        std::cout << "Antwort vom Server: " << response << std::endl;
+        client.sendData(shotMessage);
+        std::string response = client.receive(1024);
 
-        if (response == "ALL_SHIPS_DESTROYED") { // end the game if every ship was destroyed or its game over
-            return gameover;
+        std::cout << "Response of Server: " << response << std::endl;
+
+        if(response == "ALL_SHIPS_DESTROYED")
+        {
+            client.sendData("END");
+            break;
         }
 
-        firedShots.insert(shot);  // add the fired coordinates to the set to avoid duplicates
+        firedShots.insert(shot);
+        shotsFired++;
     }
-    return shotsFired; // returns the amount of shots fired
+    return shotsFired;
 }
 
 
+
+
 int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
+    
     int totalRandomShots = 0;
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
@@ -136,12 +154,13 @@ int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { 
 }
 
 int BattleShipClient::playGridStrategy(int MaxX, int MaxY, int repetitions) { // plays with the grid based strategy for a given amount of repetitions
-    int totalRasterShots = 0;
+    
+    int totalGridShots = 0;
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
         std::vector<std::pair<int, int>> rasterShots = generateGridStrategy(MaxX, MaxY); // generate a grid based strategy
-        totalRasterShots += playGame(rasterShots); // play with the grid strategy
+        totalGridShots += playGame(rasterShots); // play with the grid strategy
     }
 
-    return totalRasterShots; // returns the number of total shots needed
+    return totalGridShots; // returns the number of total shots needed
 }
