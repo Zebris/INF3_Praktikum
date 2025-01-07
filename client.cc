@@ -29,7 +29,7 @@ public:
 
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
     int playGame(const vector<std::pair<int, int>> &shots); // game logic
-    int playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
+    void playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
     int playEveryFieldStrategy(int MaxX, int MaxY, int repetitions); // plays with the everyField strategy
 
 };
@@ -123,16 +123,16 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 
 
 
-int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
+void BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
     
     int totalRandomShots = 0; // repeat the game for the specified number of repetitions
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
         std::vector<std::pair<int, int>> randomShots = randomStrategy(MaxX, MaxY); // generate a random strategy
-        totalRandomShots += playGame(randomShots); // play with the generated random strategy
+    playGame(randomShots); // play with the generated random strategy
     }
 
-    return totalRandomShots; // returns the number of total shots needed
+//    return totalRandomShots; // returns the number of total shots needed
 }
 
 
