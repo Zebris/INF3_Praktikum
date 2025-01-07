@@ -77,14 +77,14 @@ std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int 
 std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, int maxY) {
     std::vector<std::pair<int, int>> shots;
 
-    // Schieße auf jedes einzelne Feld, um vollständige Abdeckung zu erreichen
+    // Generate shots for every field on the board
     for (int x = 0; x < maxX; ++x) {
         for (int y = 0; y < maxY; ++y) {
             shots.push_back({x, y});
         }
     }
 
-    return shots;  // Rückgabe der Schüsse in der Reihenfolge
+    return shots;  // Return the list of shots in order
 }
 
 
@@ -93,13 +93,13 @@ std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, 
 
 int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 
-    int shotsFired = 0;   // Zähler für die abgefeuerten Schüsse
+    int shotsFired = 0;   // Counter for the number of shots fired
 
-    for(const auto &shot : shots)
+    for(const auto &shot : shots) //iterate over all shots
     {
-        if(firedShots.find(shot) != firedShots.end())
+        if(firedShots.find(shot) != firedShots.end()) //check if the shot has already been fired
         {
-            continue;
+            continue; //skip already fired shots
         }
 
         std::string shotMessage = "SHOT " + std::to_string(shot.first) + " " + std::to_string(shot.second);
@@ -108,16 +108,16 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 
         std::cout << "Response of Server: " << response << std::endl;
 
-        if(response == "ALL_SHIPS_DESTROYED")
+        if(response == "ALL_SHIPS_DESTROYED") // check if all ships have been destroyed
         {
             client.sendData("END");
             break;
         }
 
-        firedShots.insert(shot);
-        shotsFired++;
+        firedShots.insert(shot); // add the shot to the set of fired shots
+        shotsFired++; // increment the counter
     }
-    return shotsFired;
+    return shotsFired; // return the total number of shots fired
 }
 
 
@@ -125,7 +125,7 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 
 int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
     
-    int totalRandomShots = 0;
+    int totalRandomShots = 0; // repeat the game for the specified number of repetitions
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
         std::vector<std::pair<int, int>> randomShots = randomStrategy(MaxX, MaxY); // generate a random strategy
