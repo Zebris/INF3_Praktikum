@@ -30,7 +30,7 @@ public:
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
     int playGame(const vector<std::pair<int, int>> &shots); // game logic
     void playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
-    int playEveryFieldStrategy(int MaxX, int MaxY, int repetitions); // plays with the everyField strategy
+    void playEveryFieldStrategy(int MaxX, int MaxY, int repetitions); // plays with the everyField strategy
 
 };
 
@@ -40,12 +40,24 @@ int main() {
     std::string host = "localhost"; // defines the server host
     int port = 2022; // defines the server port
 
+
+	// connection to host
+	if(!tcpclient.conn(host, port)) // if the connection fails end the program
+	{
+		std::cerr << "Failed to connect to server!" << std::endl;
+		return 1;
+	}
+	else
+	{
+		std::cout << "Connected to the server: Game is starting!" << std::endl;
+	}
+
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-//client.playRandomStrategy(10, 10, 300); // playing with the random strategy
+client.playRandomStrategy(10, 10, 100); // playing with the random strategy
 
-client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
+//client.playEveryFieldStrategy(10, 10, 100); // playing with the everyField strategy
 
 return 0;
 
@@ -53,9 +65,6 @@ return 0;
 
 
 BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // constructor which gives the TCP client
-
-
-
 
 
 std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int maxY) { // generates a random shooting strategy
@@ -88,9 +97,6 @@ std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, 
 }
 
 
-
-
-
 int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 
     int shotsFired = 0;   // Counter for the number of shots fired
@@ -121,29 +127,18 @@ int BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots) {
 }
 
 
-
-
 void BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
     
-    int totalRandomShots = 0; // repeat the game for the specified number of repetitions
-
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        std::vector<std::pair<int, int>> randomShots = randomStrategy(MaxX, MaxY); // generate a random strategy
-    playGame(randomShots); // play with the generated random strategy
+        playGame(randomStrategy(MaxX, MaxY)); // play with the generated random strategy
     }
-
-//    return totalRandomShots; // returns the number of total shots needed
 }
 
 
-int BattleShipClient::playEveryFieldStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
+void BattleShipClient::playEveryFieldStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
     
-    int totalRandomShots = 0;
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        std::vector<std::pair<int, int>> randomShots = everyFieldStrategy(MaxX, MaxY); // generate a random strategy
-        totalRandomShots += playGame(randomShots); // play with the generated random strategy
+        playGame(everyFieldStrategy(MaxX, MaxY)); // play with the generated random strategy
     }
-
-    return totalRandomShots; // returns the number of total shots needed
 }
