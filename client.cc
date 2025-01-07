@@ -22,15 +22,16 @@ private:
     TCPclient &client; // reference of the TCP client object
     std::set<std::pair<int, int>> firedShots; // set for already shot coordinates to avoid duplicates
 
-    std::vector<std::pair<int, int>> generateRandomStrategy(int MaxX, int MaxY); // generates a random shooting strategy
-    std::vector<std::pair<int, int>> generateGridStrategy(int MaxX, int MaxY); // generates a grid based shooting strategy
+    std::vector<std::pair<int, int>> randomStrategy(int MaxX, int MaxY); // generates a random shooting strategy
+    std::vector<std::pair<int, int>> everyFieldStrategy(int MaxX, int MaxY);
 
 public:
 
     BattleShipClient(TCPclient &cli); // constructor of BattleShipClient
     int playGame(const vector<std::pair<int, int>> &shots); // game logic
     int playRandomStrategy(int MaxX, int MaxY, int repetitions); // plays with the random strategy
-    int playGridStrategy(int MaxX, int MaxY, int repetitions); // plays with the grid based strategy
+    int playEveryFieldStrategy(int MaxX, int MaxY, int repetitions);
+
 };
 
 
@@ -55,10 +56,12 @@ int main() {
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 
-client.playRandomStrategy(10, 10, 300); // playing with the random strategy
+//client.playRandomStrategy(10, 10, 300); // playing with the random strategy
 
 
-//client.playGridStrategy(10, 10, 500); // playing with the grid strategy
+//client.playGridStrategy(10, 10, 100); // playing with the grid strategy
+
+client.playEveryFieldStrategy(10, 10, 100);
 
 return 0;
 
@@ -71,7 +74,7 @@ BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // construct
 
 
 
-std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int maxX, int maxY) { // generates a random shooting strategy
+std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int maxY) { // generates a random shooting strategy
     
     std::vector<std::pair<int, int>> shots;
     
@@ -87,22 +90,17 @@ std::vector<std::pair<int, int>> BattleShipClient::generateRandomStrategy(int ma
 }
 
 
-
-
-
-std::vector<std::pair<int, int>> BattleShipClient::generateGridStrategy(int maxX, int maxY) { // generates a grid based shooting strategy
-
+std::vector<std::pair<int, int>> BattleShipClient::everyFieldStrategy(int maxX, int maxY) {
     std::vector<std::pair<int, int>> shots;
-    
-    // for loop for every possible coordinates
+
+    // Schieße auf jedes einzelne Feld, um vollständige Abdeckung zu erreichen
     for (int x = 0; x < maxX; ++x) {
-        for (int y = 0; y < maxY; ++y) { // selects only coordinates of which x + y is even
-            if ((x + y) % 2 == 0) {
-                shots.push_back({x, y}); // add these coordinates to the vector
-            }
+        for (int y = 0; y < maxY; ++y) {
+            shots.push_back({x, y});
         }
     }
-    return shots; // returns vector with grid based coordinates
+
+    return shots;  // Rückgabe der Schüsse in der Reihenfolge
 }
 
 
@@ -146,21 +144,22 @@ int BattleShipClient::playRandomStrategy(int MaxX, int MaxY, int repetitions) { 
     int totalRandomShots = 0;
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        std::vector<std::pair<int, int>> randomShots = generateRandomStrategy(MaxX, MaxY); // generate a random strategy
+        std::vector<std::pair<int, int>> randomShots = randomStrategy(MaxX, MaxY); // generate a random strategy
         totalRandomShots += playGame(randomShots); // play with the generated random strategy
     }
 
     return totalRandomShots; // returns the number of total shots needed
 }
 
-int BattleShipClient::playGridStrategy(int MaxX, int MaxY, int repetitions) { // plays with the grid based strategy for a given amount of repetitions
+
+int BattleShipClient::playEveryFieldStrategy(int MaxX, int MaxY, int repetitions) { // plays with the random strategy for a given amount of repetitions
     
-    int totalGridShots = 0;
+    int totalRandomShots = 0;
 
     for (int i = 0; i < repetitions; ++i) { // repeat the game for the amount of repetitions
-        std::vector<std::pair<int, int>> rasterShots = generateGridStrategy(MaxX, MaxY); // generate a grid based strategy
-        totalGridShots += playGame(rasterShots); // play with the grid strategy
+        std::vector<std::pair<int, int>> randomShots = everyFieldStrategy(MaxX, MaxY); // generate a random strategy
+        totalRandomShots += playGame(randomShots); // play with the generated random strategy
     }
 
-    return totalGridShots; // returns the number of total shots needed
+    return totalRandomShots; // returns the number of total shots needed
 }
