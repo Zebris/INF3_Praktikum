@@ -34,7 +34,11 @@ public:
 
 };
 
-
+int main() {
+    srand(time(NULL)); // initializes random generator with the time
+    TCPclient tcpclient; // creation of a TCPclient object
+    std::string host = "localhost"; // defines the server host
+    int port = 2022; // defines the server port
 
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
