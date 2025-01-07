@@ -35,23 +35,6 @@ public:
 };
 
 
-int main() {
-	srand(time(NULL)); // initializes random generator with the time
-	TCPclient tcpclient; // creation of a TCPclient object
-	std::string host = "localhost"; // defines the server host
-	int port = 2022; // defines the server port
-
-	// connection to host
-	if(!tcpclient.conn(host, port)) // if the connection fails end the program
-	{
-		std::cerr << "Failed to connect to server!" << std::endl;
-		return 1;
-	}
-	else
-	{
-		std::cout << "Connected to the server: Game is starting!" << std::endl;
-	}
-
 
 BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
