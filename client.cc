@@ -116,7 +116,7 @@ void BattleShipClient::playGame(const std::vector<std::pair<int, int>>& shots)
 
         std::string shotMessage = "SHOT " + std::to_string(shot.first) + " " + std::to_string(shot.second);
         client.sendData(shotMessage);
-        std::string response = client.receive(1024);
+        std::string response = client.receive(1024); // Buffersize received
 
         std::cout << "Response of Server: " << response << std::endl;
 
