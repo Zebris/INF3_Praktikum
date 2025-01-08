@@ -31,6 +31,7 @@ public:
     void playGame(const vector<std::pair<int, int>> &shots); // game logic
     void playRandomStrategy(int MaxX, int MaxY); // plays with the random strategy
     void playEveryFieldStrategy(int MaxX, int MaxY); // plays with the everyField strategy
+    ~BattleShipClient();
 
 };
 
@@ -68,6 +69,9 @@ return 0;
 
 
 BattleShipClient::BattleShipClient(TCPclient &cli) : client(cli) {} // constructor which gives the TCP client
+
+
+BattleShipClient::~BattleShipClient(){};
 
 
 std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int maxY) // generates a random shooting strategy
