@@ -211,4 +211,6 @@ void ServerShip::printBoard() {
 // Serverkommand | Antwort | Kommentar (Fehlerfälle) |
 // undefined string | ERROR | ...
 // Koordinatenbereich eingehalten | SPezifisch / ERROR 
-//telnet localhost:2022 
+//telnet localhost:2022
+
+// mit new im Konstruktor erzeugen und TASK3::World *world anlegen
