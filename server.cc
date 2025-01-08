@@ -210,4 +210,5 @@ void ServerShip::printBoard() {
 // Protokoll(Kommunikation):
 // Serverkommand | Antwort | Kommentar (Fehlerfälle) |
 // undefined string | ERROR | ...
-// Koordinatenbereich eingehalten | SPezifisch / ERROR   
+// Koordinatenbereich eingehalten | SPezifisch / ERROR 
+//telnet localhost:2022 
