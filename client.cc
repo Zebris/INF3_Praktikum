@@ -75,8 +75,8 @@ std::vector<std::pair<int, int>> BattleShipClient::randomStrategy(int maxX, int 
     std::vector<std::pair<int, int>> shots;
     
     // for loop for every possible coordinates
-    for (size_t x = 0; x < maxX; ++x) {
-        for (size_t y = 0; y < maxY; ++y) {
+    for (int x = 0; x < maxX; ++x) {
+        for (int y = 0; y < maxY; ++y) {
             shots.push_back({x, y}); // adds every coordinate to the vector
         }
     }

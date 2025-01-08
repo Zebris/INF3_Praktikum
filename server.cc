@@ -19,10 +19,9 @@
 
 #include "SIMPLESOCKET.h"
 #include "TASK3.h"
-#include <sstream>
-#include <vector>
-#include <string>
-#include <array>
+#include <sstream> // needed for sscanf
+#include <vector> // contains std::vector and functions
+#include <string> //
 
 class ServerShip: public TCPserver // the class "ServerShip" inherits public aspects of TCPserver and contains information of the game board
 {
