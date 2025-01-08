@@ -58,9 +58,9 @@ BattleShipClient client(tcpclient); // creation of a BattleShipClient object
 
 /* Playing the different strategies */
 
-//client.playRandomStrategy(10, 10); // playing with the random strategy
+client.playRandomStrategy(10, 10); // playing with the random strategy
 
-client.playEveryFieldStrategy(10, 10); // playing with the everyField strategy
+//client.playEveryFieldStrategy(10, 10); // playing with the everyField strategy
 
 return 0;
 
