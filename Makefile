@@ -19,7 +19,8 @@ TASK3.o:	TASK3.cc
 	$(CC) -c $<  -std=c++11
  
 main.o:	main.cc
-	$(CC) -c $<  -std=c++11	
+	$(CC) -c $<  -std=c++11
+
 
 
 
@@ -42,7 +43,7 @@ doc:
 
 
 all:	$(DEMOTARGET)
-	make clean  && make main && make server && make client
+	make clean  && make main && make server && make client 
 
 run:	main	
 	./main
