@@ -19,19 +19,62 @@
  
  #include "SIMPLESOCKET.h" // definition of the TCP client
  
+ /**
+ * @class BattleShipClient
+ * @brief Handles communication with the game server and executes different shooting strategies.
+ */
  class BattleShipClient {
  public:
+     /**
+     * @brief Constructs a BattleShipClient object.
+     * @param cli Reference to an instance of TCPclient.
+     */
      BattleShipClient(TCPclient &cli);
+
+     /**
+     * @brief Plays a game using a given strategy.
+     * @param shots A vector of coordinate pairs representing shot positions.
+     * @param strategyName The name of the strategy used.
+     */
      void playGame(const std::vector<std::pair<int, int>> &shots, const std::string &strategyName);
+
+     /**
+     * @brief Starts the game loop and prompts the user for input.
+     * @param maxX Maximum x-coordinate of the battlefield.
+     * @param maxY Maximum y-coordinate of the battlefield.
+     */
      void gameStart(int maxX, int maxY);
+
+     /**
+     * @brief Saves the game statistics to a file.
+     * @param amountOfShots The number of shots fired.
+     * @param strategyName The strategy used.
+     */
      void saveStats(int amountOfShots, const std::string &strategyName);
+
+     /**
+     * @brief Destructor for the BattleShipClient class.
+     */
      ~BattleShipClient();
  
  private:
-     TCPclient &client;
-     std::set<std::pair<int, int>> m_firedShots;
+     TCPclient &client; ///< Reference to the TCP client instance.
+     std::set<std::pair<int, int>> m_firedShots; ///< Stores coordinates of fired shots
  
+     /**
+     * @brief Generates a random shooting strategy.
+     * @param maxX Maximum x-coordinate of the battlefield.
+     * @param maxY Maximum y-coordinate of the battlefield.
+     * @return A vector of coordinate pairs representing the shot sequence.
+     */
      std::vector<std::pair<int, int>> randomStrategy(int maxX, int maxY);
+
+     /**
+     * @brief Generates a step-by-step shooting strategy.
+     * @param maxX Maximum x-coordinate of the battlefield.
+     * @param maxY Maximum y-coordinate of the battlefield.
+     * @return A vector of coordinate pairs representing the shot sequence.
+     */
      std::vector<std::pair<int, int>> everyFieldStrategy(int maxX, int maxY);
  };
  

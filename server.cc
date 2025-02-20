@@ -24,28 +24,53 @@
  #include <vector>
  #include <string>
  #include <array>
+
+ /**
+ *
+ * \class ServerShip
+ *
+ * \brief Inherits from class TCPserver.
+ *
+ *
+ */
  
  class ServerShip : public TCPserver {
  public:
+     /**
+     * @brief Constructs a ServerShip object.
+     * @param portNmb Port number on which the server listens.
+     * @param bSize Buffer size for incoming messages.
+     */
      ServerShip(int portNmb, int bSize);
+     /**
+     * @brief Destructor to clean up resources.
+     */
      ~ServerShip();
  
  private:
+     /**
+     * @brief Private constructor to prevent instantiation without parameters.
+     */
      ServerShip();
      TASK3::World *m_world;
  
  protected:
+     /**
+     * @brief Processes client requests and returns appropriate responses.
+     * @param input Client's request message.
+     * @return std::string server's response message.
+     */
      std::string myResponse(const std::string &input) override;
  };
  
  int main() {
-     ServerShip srv(2022, 25);
-     srv.run();
+     ServerShip srv(2022, 25); ///< Creates and initializes the game server.
+     srv.run(); ///< Starts the server.
      return 0;
  }
  
  ServerShip::ServerShip(int portNmb, int bSize) : TCPserver(portNmb, bSize) {
-     m_world = new TASK3::World();
+     m_world = new TASK3::World(); ///< Initializes the game board.
      std::cout << "Server initialized on port " << portNmb << std::endl;
  }
  
@@ -57,7 +82,7 @@
  
      if (input.compare(0, 7, "NEWGAME") == 0) {
          delete m_world;
-         m_world = new TASK3::World();
+         m_world = new TASK3::World(); ///< Resets the game board.
          return std::string("READY");
      }
  
