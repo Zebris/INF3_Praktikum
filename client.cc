@@ -168,7 +168,7 @@
      sleep(0.5);
  }
  
- void BattleShipClient::gameStart(int MaxX, int MaxY) {
+ void BattleShipClient::gameStart(int maxX, int maxY) {
      std::uint32_t strategyInput = 0;
      std::uint32_t amountOfGames = 0;
  
@@ -182,12 +182,12 @@
      if (strategyInput == 1) {
          for (int i = 0; i < amountOfGames; i++) {
              m_firedShots.clear();
-             playGame(everyFieldStrategy(MaxX, MaxY), "Step-by-Step Strategy");
+             playGame(everyFieldStrategy(maxX, maxY), "Step-by-Step Strategy");
          }
      } else if (strategyInput == 2) {
          for (int i = 0; i < amountOfGames; i++) {
              m_firedShots.clear();
-             playGame(randomStrategy(MaxX, MaxY), "Random Strategy");
+             playGame(randomStrategy(maxX, maxY), "Random Strategy");
          }
      } else {
          std::cout << "Invalid Strategy!" << std::endl;
