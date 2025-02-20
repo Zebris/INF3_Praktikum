@@ -23,16 +23,16 @@
  public:
      BattleShipClient(TCPclient &cli);
      void playGame(const std::vector<std::pair<int, int>> &shots, const std::string &strategyName);
-     void gameStart(int MaxX, int MaxY);
+     void gameStart(int maxX, int maxY);
      void saveStats(int amountOfShots, const std::string &strategyName);
      ~BattleShipClient();
  
  private:
      TCPclient &client;
-     std::set<std::pair<int, int>> firedShots;
+     std::set<std::pair<int, int>> m_firedShots;
  
-     std::vector<std::pair<int, int>> randomStrategy(int MaxX, int MaxY);
-     std::vector<std::pair<int, int>> everyFieldStrategy(int MaxX, int MaxY);
+     std::vector<std::pair<int, int>> randomStrategy(int maxX, int maxY);
+     std::vector<std::pair<int, int>> everyFieldStrategy(int maxX, int maxY);
  };
  
  int main() {
@@ -86,7 +86,7 @@
      std::uint32_t shotcount = 0;
  
      for (const auto &shot : shots) {
-         if (firedShots.find(shot) != firedShots.end()) {
+         if (m_firedShots.find(shot) != m_firedShots.end()) {
              std::cout << "Skipping fired shot: " << shot.first << "," << shot.second << std::endl;
              continue;
          }
@@ -116,7 +116,7 @@
              break;
          }
  
-         firedShots.insert(shot);
+         m_firedShots.insert(shot);
          shotcount++;
      }
  
@@ -138,12 +138,12 @@
  
      if (strategyInput == 1) {
          for (int i = 0; i < amountOfGames; i++) {
-             firedShots.clear();
+             m_firedShots.clear();
              playGame(everyFieldStrategy(MaxX, MaxY), "Step-by-Step Strategy");
          }
      } else if (strategyInput == 2) {
          for (int i = 0; i < amountOfGames; i++) {
-             firedShots.clear();
+             m_firedShots.clear();
              playGame(randomStrategy(MaxX, MaxY), "Random Strategy");
          }
      } else {

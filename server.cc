@@ -32,7 +32,7 @@
  
  private:
      ServerShip();
-     TASK3::World *world;
+     TASK3::World *m_world;
  
  protected:
      std::string myResponse(const std::string &input) override;
@@ -45,9 +45,8 @@
  }
  
  ServerShip::ServerShip(int portNmb, int bSize) : TCPserver(portNmb, bSize) {
-     world = new TASK3::World();
+     m_world = new TASK3::World();
      std::cout << "Server initialized on port " << portNmb << std::endl;
-     std::cout << "Boardsize 10x10" << std::endl;
  }
  
  ServerShip::~ServerShip() {}
@@ -57,8 +56,8 @@
      auto y = -1;
  
      if (input.compare(0, 7, "NEWGAME") == 0) {
-         delete world;
-         world = new TASK3::World();
+         delete m_world;
+         m_world = new TASK3::World();
          return std::string("READY");
      }
  
@@ -71,7 +70,7 @@
              return std::string("ERRORBORDER");
          }
  
-         TASK3::ShootResult result = world->shoot(x, y);
+         TASK3::ShootResult result = m_world->shoot(x, y);
  
          switch (result) {
              case TASK3::WATER:
@@ -79,7 +78,7 @@
              case TASK3::SHIP_HIT:
                  return "SHIPHIT";
              case TASK3::SHIP_DESTROYED:
-                 return "SHIPDEST";
+                 return "SHIPDESTROYED";
              case TASK3::ALL_SHIPS_DESTROYED:
              case TASK3::GAME_OVER:
                  return "GAMEOVER";
