@@ -3,6 +3,9 @@
  *
  *  Created on: 11.09.2019
  *      Author: aml
+ * 
+ * Updated by Group No. 2
+ * M. Fichtner, M. Holzer, L. Hornig
  */
 
  #include <iostream>
