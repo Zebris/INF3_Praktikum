@@ -20,7 +20,7 @@
  #include <set>          // needed for duplicate avoidance of shots
  #include <stdint.h>     // needed for std::uint32_t etc.
  
- #include "SIMPLESOCKET.h" // definition of the TCP client
+ #include "SIMPLESOCKET.H" // definition of the TCP client
  
  /**
  * @class BattleShipClient

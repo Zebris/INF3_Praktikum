@@ -21,8 +21,8 @@
  #include <sys/socket.h>
  #include <netinet/in.h>
  
- #include "SIMPLESOCKET.h"
- #include "TASK3.c"
+ #include "SIMPLESOCKET.H"
+ #include "TASK3.C"
  #include <sstream>
  #include <vector>
  #include <string>

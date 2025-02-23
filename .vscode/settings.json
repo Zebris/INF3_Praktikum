@@ -109,6 +109,11 @@
     "sstream": "cpp",
     "TASK2.C": "cpp",
     "SHA256.C": "cpp",
-    "mainTest.C": "cpp"
+    "mainTest.C": "cpp",
+    "TASK1.C": "cpp",
+    "task3.h": "c",
+    "TASK4.C": "cpp",
+    "TASK5.C": "cpp",
+    "unistd.h": "c"
   }
 }
