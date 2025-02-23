@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : INF3_Praktikum.cpp
-// Author      : Gruppe 2; Fichtner, Holzer, Hornig
+// Author      : Gruppe 2; M. Fichtner, M. Holzer, L. Hornig
 // Version     : 0.01
 //============================================================================
 
