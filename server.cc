@@ -88,7 +88,7 @@
  
      if (input.compare(0, 6, "COORD[") == 0) {
          if (sscanf(input.c_str(), "COORD[%d,%d]", &x, &y) != 2) {
-             return std::string("Error. Could not read coord-data.");
+             return std::string("Error. Could not read coordinates.");
          }
  
          if (x > 10 && y > 10) {
