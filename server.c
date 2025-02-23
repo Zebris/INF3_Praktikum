@@ -22,7 +22,7 @@
  #include <netinet/in.h>
  
  #include "SIMPLESOCKET.h"
- #include "TASK3.cc"
+ #include "TASK3.c"
  #include <sstream>
  #include <vector>
  #include <string>

@@ -106,6 +106,7 @@
     "cinttypes": "cpp",
     "typeinfo": "cpp",
     "set": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "TASK2.C": "cpp"
   }
 }
