@@ -107,6 +107,8 @@
     "typeinfo": "cpp",
     "set": "cpp",
     "sstream": "cpp",
-    "TASK2.C": "cpp"
+    "TASK2.C": "cpp",
+    "SHA256.C": "cpp",
+    "mainTest.C": "cpp"
   }
 }
