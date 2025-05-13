@@ -11,9 +11,7 @@
  #include <iostream>
  #include <cstdio>
  #include <cstdlib>
- #include <cstring>
- #include <cerrno>
- #include <ctime>
+
  
  #include <unistd.h>
  #include <sys/types.h>
@@ -23,10 +21,7 @@
  
  #include "SIMPLESOCKET.H"
  #include "TASK3.C"
- #include <sstream>
- #include <vector>
  #include <string>
- #include <array>
 
  /**
  *

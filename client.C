@@ -14,10 +14,8 @@
  #include <algorithm>    // std::random_shuffle für shuffling the shots
  #include <ctime>
  #include <fstream>      // needed for data output
- #include <cstring>
  #include <cstdlib>
  #include <unistd.h>     // contains various constants
- #include <set>          // needed for duplicate avoidance of shots
  #include <stdint.h>     // needed for std::uint32_t etc.
  
  #include "SIMPLESOCKET.H" // definition of the TCP client
