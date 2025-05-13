@@ -109,7 +109,7 @@
          }
      }
  
-     std::random_shuffle(shots.begin(), shots.end());
+     std::random_shuffle(shots.begin(), shots.end()); //Shuffles pair positions
      return shots;
  }
  
@@ -160,7 +160,6 @@
  
      std::cout << "Total shots fired: " << shotcount << std::endl;
      saveStats(shotcount, strategyName);
-     sleep(0.5);
  }
  
  void BattleShipClient::gameStart(int maxX, int maxY) {

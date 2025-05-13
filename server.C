@@ -75,8 +75,8 @@
  ServerShip::~ServerShip() {}
  
  std::string ServerShip::myResponse(const std::string &input) {
-     auto x = -1;
-     auto y = -1;
+     auto x = 0;
+     auto y = 0;
  
      if (input.compare(0, 7, "NEWGAME") == 0) {
          delete m_world;
