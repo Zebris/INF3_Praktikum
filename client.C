@@ -156,8 +156,7 @@
  
              break;
          }
- 
-         m_firedShots.insert(shot);
+
          shotcount++;
      }
  
@@ -179,12 +178,10 @@
  
      if (strategyInput == 1) {
          for (int i = 0; i < amountOfGames; i++) {
-             m_firedShots.clear();
              playGame(everyFieldStrategy(maxX, maxY), "Step-by-Step Strategy");
          }
      } else if (strategyInput == 2) {
          for (int i = 0; i < amountOfGames; i++) {
-             m_firedShots.clear();
              playGame(randomStrategy(maxX, maxY), "Random Strategy");
          }
      } else {
