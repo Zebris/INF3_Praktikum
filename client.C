@@ -62,7 +62,6 @@
  
  private:
      TCPclient &client; ///< Reference to the TCP client instance.
-     std::set<std::pair<int, int>> m_firedShots; ///< Stores coordinates of fired shots
  
      /**
      * @brief Generates a random shooting strategy.
