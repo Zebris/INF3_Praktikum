@@ -94,7 +94,7 @@
              return std::string("Error. Could not read coordinates.");
          }
  
-         if (x > 10 && y > 10) {
+         if (x < 1 || x > 10 || y < 1 || y > 10) {
              return std::string("ERRORBORDER");
          }
  
