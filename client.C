@@ -132,11 +132,7 @@
      std::uint32_t shotcount = 0;
  
      for (const auto &shot : shots) {
-         if (m_firedShots.find(shot) != m_firedShots.end()) {
-             std::cout << "Skipping fired shot: " << shot.first << "," << shot.second << std::endl;
-             continue;
-         }
- 
+
          std::string shotMessage = "COORD[" + std::to_string(shot.first) + "," + std::to_string(shot.second) + "]";
          client.sendData(shotMessage);
  
