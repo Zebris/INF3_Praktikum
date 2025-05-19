@@ -115,6 +115,7 @@
     "TASK4.C": "cpp",
     "TASK5.C": "cpp",
     "unistd.h": "c",
-    "TASK3.H": "cpp"
+    "TASK3.H": "cpp",
+    "client.C": "cpp"
   }
 }
