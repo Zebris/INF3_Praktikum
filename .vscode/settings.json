@@ -114,6 +114,7 @@
     "task3.h": "c",
     "TASK4.C": "cpp",
     "TASK5.C": "cpp",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "TASK3.H": "cpp"
   }
 }
